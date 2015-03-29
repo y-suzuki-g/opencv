@@ -18,7 +18,7 @@ endif()
 #build the list of opencv libs and dependencies for all modules
 set(OpenCV_LIB_COMPONENTS "")
 set(OpenCV_EXTRA_COMPONENTS "")
-foreach(m ${OPENCV_MODULES_PUBLIC})
+foreach(m ${OUTPUT_MODULES_PUBLIC})
   list(INSERT OpenCV_LIB_COMPONENTS 0 ${${m}_MODULE_DEPS_${ocv_optkind}} ${m})
   if(${m}_EXTRA_DEPS_${ocv_optkind})
     list(INSERT OpenCV_EXTRA_COMPONENTS 0 ${${m}_EXTRA_DEPS_${ocv_optkind}})
@@ -92,9 +92,9 @@ set(libdir      "\${exec_prefix}/${OPENCV_LIB_INSTALL_PATH}")
 set(includedir  "\${prefix}/${OPENCV_INCLUDE_INSTALL_PATH}")
 
 if(INSTALL_TO_MANGLED_PATHS)
-  set(OPENCV_PC_FILE_NAME "opencv-${OPENCV_VERSION}.pc")
+  set(OPENCV_PC_FILE_NAME "${INSTALL_LIB_PREFIX}-${OPENCV_VERSION}.pc")
 else()
-  set(OPENCV_PC_FILE_NAME opencv.pc)
+  set(OPENCV_PC_FILE_NAME ${INSTALL_LIB_PREFIX}.pc)
 endif()
 configure_file("${OpenCV_SOURCE_DIR}/cmake/templates/opencv-XXX.pc.in"
                "${CMAKE_BINARY_DIR}/unix-install/${OPENCV_PC_FILE_NAME}"

@@ -57,6 +57,7 @@ endforeach()
 
 # clean modules info which needs to be recalculated
 set(OPENCV_MODULES_PUBLIC         "" CACHE INTERNAL "List of OpenCV modules marked for export")
+set(OUTPUT_MODULES_PUBLIC         "" CACHE INTERNAL "List of Output modules marked for export")
 set(OPENCV_MODULES_BUILD          "" CACHE INTERNAL "List of OpenCV modules included into the build")
 set(OPENCV_MODULES_DISABLED_USER  "" CACHE INTERNAL "List of OpenCV modules explicitly disabled by user")
 set(OPENCV_MODULES_DISABLED_AUTO  "" CACHE INTERNAL "List of OpenCV modules implicitly disabled due to dependencies")
@@ -107,6 +108,7 @@ endmacro()
 macro(ocv_add_module _name)
   string(TOLOWER "${_name}" name)
   set(the_module opencv_${name})
+  set(output_module ${INSTALL_LIB_PREFIX}_${name})
 
   # the first pass - collect modules info, the second pass - create targets
   if(OPENCV_INITIAL_PASS)
@@ -145,6 +147,7 @@ macro(ocv_add_module _name)
       ocv_add_dependencies(${the_module} ${ARGN})
       if(BUILD_${the_module})
         set(OPENCV_MODULES_PUBLIC ${OPENCV_MODULES_PUBLIC} "${the_module}" CACHE INTERNAL "List of OpenCV modules marked for export")
+        set(OUTPUT_MODULES_PUBLIC ${OUTPUT_MODULES_PUBLIC} "${output_module}" CACHE INTERNAL "List of Output modules marked for export")
       endif()
     endif()
 
@@ -584,7 +587,7 @@ macro(ocv_create_module)
   endif()
 
   set_target_properties(${the_module} PROPERTIES
-    OUTPUT_NAME "${the_module}${OPENCV_DLLVERSION}"
+    OUTPUT_NAME "${output_module}${OPENCV_DLLVERSION}"
     DEBUG_POSTFIX "${OPENCV_DEBUG_POSTFIX}"
     ARCHIVE_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH}
     LIBRARY_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH}
