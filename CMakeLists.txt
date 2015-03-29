@@ -207,7 +207,6 @@ OCV_OPTION(INSTALL_PYTHON_EXAMPLES  "Install Python examples"   OFF )
 OCV_OPTION(INSTALL_ANDROID_EXAMPLES "Install Android examples"  OFF IF ANDROID )
 OCV_OPTION(INSTALL_TO_MANGLED_PATHS "Enables mangled install paths, that help with side by side installs." OFF IF (UNIX AND NOT ANDROID AND NOT IOS AND BUILD_SHARED_LIBS) )
 OCV_OPTION(INSTALL_TESTS            "Install accuracy and performance test binaries and test data" OFF)
-OCV_OPTION(INSTALL_LIB_PREFIX       "Install library prefix" "opencv")
 
 # OpenCV build options
 # ===================================================
@@ -237,6 +236,14 @@ OCV_OPTION(ENABLE_LIBVS2013           "Build VS2013 with Visual Studio 2013 libr
 OCV_OPTION(ENABLE_WINSDK81            "Build VS2013 with Windows 8.1 SDK"                        OFF  IF WIN32 AND (MSVC_VERSION EQUAL 1800) )
 OCV_OPTION(ENABLE_WINPHONESDK80       "Build with Windows Phone 8.0 SDK"                         OFF  IF WIN32 AND (MSVC_VERSION EQUAL 1700) )
 OCV_OPTION(ENABLE_WINPHONESDK81       "Build VS2013 with Windows Phone 8.1 SDK"                  OFF  IF WIN32 AND (MSVC_VERSION EQUAL 1800) )
+
+# library options
+# ===================================================
+if(DEFINED INSTALL_LIB_PREFIX)
+  set(INSTALL_LIB_PREFIX "${INSTALL_LIB_PREFIX}")
+else()
+  set(INSTALL_LIB_PREFIX "opencv")
+endif()
 
 # uncategorized options
 # ===================================================
