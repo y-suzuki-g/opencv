@@ -293,6 +293,7 @@ set_target_properties(${the_module} PROPERTIES LINK_INTERFACE_LIBRARIES "")
 
 ocv_add_precompiled_headers(${the_module})
 ocv_warnings_disable(CMAKE_CXX_FLAGS -Wno-deprecated-declarations)
+add_definitions(-DINSTALL_LIB_PREFIX=${INSTALL_LIB_PREFIX})
 
 if(WIN32 AND WITH_FFMPEG)
   #copy ffmpeg dll to the output folder
@@ -300,8 +301,8 @@ if(WIN32 AND WITH_FFMPEG)
     set(FFMPEG_SUFFIX _64)
   endif()
 
-  set(ffmpeg_bare_name "opencv_ffmpeg${FFMPEG_SUFFIX}.dll")
-  set(ffmpeg_bare_name_ver "opencv_ffmpeg${OPENCV_DLLVERSION}${FFMPEG_SUFFIX}.dll")
+  set(ffmpeg_bare_name "${INSTALL_LIB_PREFIX}_ffmpeg${FFMPEG_SUFFIX}.dll")
+  set(ffmpeg_bare_name_ver "${INSTALL_LIB_PREFIX}_ffmpeg${OPENCV_DLLVERSION}${FFMPEG_SUFFIX}.dll")
   set(ffmpeg_path "${OpenCV_SOURCE_DIR}/3rdparty/ffmpeg/${ffmpeg_bare_name}")
 
   #if(MSVC AND CMAKE_VERSION VERSION_GREATER "2.8.2")

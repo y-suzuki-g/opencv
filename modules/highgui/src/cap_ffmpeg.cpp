@@ -86,7 +86,7 @@ private:
     {
     #if defined WIN32 || defined _WIN32
     # ifdef HAVE_WINRT
-        const wchar_t* module_name = L"opencv_ffmpeg"
+        const wchar_t* module_name = CVAUX_STRW(INSTALL_LIB_PREFIX) L"_ffmpeg"
             CVAUX_STRW(CV_MAJOR_VERSION) CVAUX_STRW(CV_MINOR_VERSION) CVAUX_STRW(CV_SUBMINOR_VERSION)
         #if (defined _MSC_VER && defined _M_X64) || (defined __GNUC__ && defined __x86_64__)
             L"_64"
@@ -95,7 +95,7 @@ private:
 
         icvFFOpenCV = LoadPackagedLibrary( module_name, 0 );
     # else
-        const char* module_name = "opencv_ffmpeg"
+        const char* module_name = CVAUX_STR(INSTALL_LIB_PREFIX) "_ffmpeg"
             CVAUX_STR(CV_MAJOR_VERSION) CVAUX_STR(CV_MINOR_VERSION) CVAUX_STR(CV_SUBMINOR_VERSION)
         #if (defined _MSC_VER && defined _M_X64) || (defined __GNUC__ && defined __x86_64__)
             "_64"

@@ -761,7 +761,7 @@ namespace
         if (!initialized)
         {
             #if defined WIN32 || defined _WIN32
-                const char* module_name = "opencv_ffmpeg"
+                const char* module_name = CVAUX_STR(INSTALL_LIB_PREFIX) "_ffmpeg"
                     CVAUX_STR(CV_VERSION_EPOCH) CVAUX_STR(CV_VERSION_MAJOR) CVAUX_STR(CV_VERSION_MINOR)
                 #if (defined _MSC_VER && defined _M_X64) || (defined __GNUC__ && defined __x86_64__)
                     "_64"
