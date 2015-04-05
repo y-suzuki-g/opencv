@@ -303,7 +303,7 @@ if(WIN32 AND WITH_FFMPEG)
 
   set(ffmpeg_bare_name "${INSTALL_LIB_PREFIX}_ffmpeg${FFMPEG_SUFFIX}.dll")
   set(ffmpeg_bare_name_ver "${INSTALL_LIB_PREFIX}_ffmpeg${OPENCV_DLLVERSION}${FFMPEG_SUFFIX}.dll")
-  set(ffmpeg_path "${OpenCV_SOURCE_DIR}/3rdparty/ffmpeg/${ffmpeg_bare_name}")
+  set(ffmpeg_path "${OpenCV_SOURCE_DIR}/3rdparty/ffmpeg/opencv_ffmpeg${FFMPEG_SUFFIX}.dll")
 
   #if(MSVC AND CMAKE_VERSION VERSION_GREATER "2.8.2")
   #  add_custom_command(TARGET ${the_module} POST_BUILD
